@@ -10,11 +10,15 @@ import UIKit
 
 class TranscriptionPageViewController: UIViewController {
 
+    let messageCenter = AvaMessageCenter.sharedCenter
+
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        tableView.dataSource = self
+
+        tableView.estimatedRowHeight = 40
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,4 +29,26 @@ class TranscriptionPageViewController: UIViewController {
 
 }
 
-extension ViewController
+extension TranscriptionPageViewController: UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messageCenter.messageCount
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ChatCell", forIndexPath: indexPath)
+        cell.textLabel?.text = messageCenter.messages[indexPath.row].user.userName
+        cell.detailTextLabel?.text = messageCenter.messages[indexPath.row].messageBody
+        return cell
+    }
+}
+
+extension  TranscriptionPageViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // TODO: Add contents of selected Row to Speech Queue. Enable Speech Button
+    }
+
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        // TODO: Remove seleced text from speech Queue. Disable speech button
+    }
+
+}

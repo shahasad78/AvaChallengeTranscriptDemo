@@ -7,21 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CB4A2EFFECDB3C4C8DAF58F /* AvaMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4A9B9C2C169290D546934 /* AvaMessage.swift */; };
+		3CB4AA8AB6A62E6180BEADAF /* AvaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4A23C65B8D29CC0FACEEB /* AvaUser.swift */; };
+		CB3DD7DB1D5871180069CB9D /* AvaMessageCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3DD7DA1D5871180069CB9D /* AvaMessageCenter.swift */; };
 		CB721F591D57F4DB00064085 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB721F581D57F4DB00064085 /* AppDelegate.swift */; };
-		CB721F5B1D57F4DB00064085 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB721F5A1D57F4DB00064085 /* ViewController.swift */; };
+		CB721F5B1D57F4DB00064085 /* TranscriptionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB721F5A1D57F4DB00064085 /* TranscriptionPageViewController.swift */; };
 		CB721F5E1D57F4DB00064085 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB721F5C1D57F4DB00064085 /* Main.storyboard */; };
 		CB721F601D57F4DB00064085 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB721F5F1D57F4DB00064085 /* Assets.xcassets */; };
 		CB721F631D57F4DB00064085 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB721F611D57F4DB00064085 /* LaunchScreen.storyboard */; };
+		CB721F6B1D58315200064085 /* ProfileIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB721F6A1D58315200064085 /* ProfileIconView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3CB4A23C65B8D29CC0FACEEB /* AvaUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvaUser.swift; sourceTree = "<group>"; };
+		3CB4A9B9C2C169290D546934 /* AvaMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvaMessage.swift; sourceTree = "<group>"; };
+		CB3DD7DA1D5871180069CB9D /* AvaMessageCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvaMessageCenter.swift; sourceTree = "<group>"; };
 		CB721F551D57F4DB00064085 /* AvaChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AvaChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB721F581D57F4DB00064085 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CB721F5A1D57F4DB00064085 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CB721F5A1D57F4DB00064085 /* TranscriptionPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionPageViewController.swift; sourceTree = "<group>"; };
 		CB721F5D1D57F4DB00064085 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CB721F5F1D57F4DB00064085 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB721F621D57F4DB00064085 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB721F641D57F4DB00064085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB721F6A1D58315200064085 /* ProfileIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIconView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +63,15 @@
 			isa = PBXGroup;
 			children = (
 				CB721F581D57F4DB00064085 /* AppDelegate.swift */,
-				CB721F5A1D57F4DB00064085 /* ViewController.swift */,
+				CB721F5A1D57F4DB00064085 /* TranscriptionPageViewController.swift */,
 				CB721F5C1D57F4DB00064085 /* Main.storyboard */,
+				CB3DD7DA1D5871180069CB9D /* AvaMessageCenter.swift */,
+				CB721F6A1D58315200064085 /* ProfileIconView.swift */,
 				CB721F5F1D57F4DB00064085 /* Assets.xcassets */,
 				CB721F611D57F4DB00064085 /* LaunchScreen.storyboard */,
 				CB721F641D57F4DB00064085 /* Info.plist */,
+				3CB4A23C65B8D29CC0FACEEB /* AvaUser.swift */,
+				3CB4A9B9C2C169290D546934 /* AvaMessage.swift */,
 			);
 			path = AvaChallenge;
 			sourceTree = "<group>";
@@ -135,8 +147,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB721F5B1D57F4DB00064085 /* ViewController.swift in Sources */,
+				CB721F6B1D58315200064085 /* ProfileIconView.swift in Sources */,
+				CB721F5B1D57F4DB00064085 /* TranscriptionPageViewController.swift in Sources */,
 				CB721F591D57F4DB00064085 /* AppDelegate.swift in Sources */,
+				CB3DD7DB1D5871180069CB9D /* AvaMessageCenter.swift in Sources */,
+				3CB4AA8AB6A62E6180BEADAF /* AvaUser.swift in Sources */,
+				3CB4A2EFFECDB3C4C8DAF58F /* AvaMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +302,7 @@
 				CB721F691D57F4DB00064085 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
