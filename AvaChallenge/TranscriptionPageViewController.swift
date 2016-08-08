@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TranscriptionPageViewController: UIViewController {
+
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,3 +25,4 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController
