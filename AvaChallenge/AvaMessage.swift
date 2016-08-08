@@ -5,5 +5,7 @@
 
 import Foundation
 
-class AvaMessage {
+struct AvaMessage {
+    let user: AvaUser
+    var messageBody: String?
 }

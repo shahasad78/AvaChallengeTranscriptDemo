@@ -6,4 +6,13 @@
 import Foundation
 
 class AvaUser {
+
+    let userId: String
+    let userName: String
+
+    init(userId: String, userName: String) {
+        self.userId = userId
+        self.userName = userName
+    }
+
 }
