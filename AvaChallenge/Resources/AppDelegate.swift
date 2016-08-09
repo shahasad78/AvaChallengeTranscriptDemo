@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
         self.client = PubNub.clientWithConfiguration(configuration)
 
         configuration.uuid = "00001aa2"
-        self.client?.addListener(self)
+//        self.client?.addListener(self)
     }
 
     func client(_ client: PubNub!, didReceiveMessage message: PNMessageResult!) {

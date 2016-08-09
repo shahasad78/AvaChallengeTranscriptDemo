@@ -16,10 +16,14 @@
 		3CB4A7E379B5DDB720549779 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4ADEC84B3DF7F3C27E9F0 /* AppDelegate.swift */; };
 		3CB4A919DE3BD4FD7CEE5A26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CB4AE4D8EFB2E01E7820279 /* Assets.xcassets */; };
 		3CB4A9A5A53144B940ACAD5F /* AvaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4ADE56A795A31D870DEC7 /* AvaUser.swift */; };
+		3CB4AB36AF61183C4C1108CC /* Bool+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4A709439EE771591B8D26 /* Bool+Int.swift */; };
 		3CB4AB39ACC60FE35C3E7834 /* TranscriptionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4A86BC1019BDFABDDB272 /* TranscriptionPageViewController.swift */; };
+		3CB4ABA6D67695FEF1290CDD /* TranscriptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4AB864046131E7C171124 /* TranscriptCell.swift */; };
 		3CB4AC21C494EB1B848F8157 /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4AFDF094AD48CD130EA71 /* AudioUtils.swift */; };
 		3CB4AEC60668E5BFD8C55E4A /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4AF3B3A98C2D0BEFE5E3E /* AudioManager.swift */; };
 		3CB4AF48B0056080FC3AD301 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CB4ADC7F74385B1C2BA8872 /* LaunchScreen.storyboard */; };
+		3CB4AFEB482D11D5AD552799 /* DataFlowNotes in Resources */ = {isa = PBXBuildFile; fileRef = 3CB4A12829E23C9D9B876045 /* DataFlowNotes */; };
+		CB15F9861D599B17002865B3 /* AvaMessage+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB15F9851D599B17002865B3 /* AvaMessage+TableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,11 +31,14 @@
 		3AEF346871057F61D4FD54D3 /* Pods_AvaChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AvaChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CB4A011AC766D99FA3B47C4 /* ProfileIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIconView.swift; sourceTree = "<group>"; };
 		3CB4A0B08CBB6BA3FFFE02B5 /* UITableView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Scroll.swift"; sourceTree = "<group>"; };
+		3CB4A12829E23C9D9B876045 /* DataFlowNotes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DataFlowNotes; sourceTree = "<group>"; };
 		3CB4A1F5D5052D3D7ECD94DF /* AvaMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvaMessage.swift; sourceTree = "<group>"; };
 		3CB4A568EA3CEF97CCC7BED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3CB4A709439EE771591B8D26 /* Bool+Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bool+Int.swift"; sourceTree = "<group>"; };
 		3CB4A8000FA40CBDBC4AB470 /* AvaMessageCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvaMessageCenter.swift; sourceTree = "<group>"; };
 		3CB4A86BC1019BDFABDDB272 /* TranscriptionPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranscriptionPageViewController.swift; sourceTree = "<group>"; };
 		3CB4A8DF0BE51999C0B54F57 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		3CB4AB864046131E7C171124 /* TranscriptCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranscriptCell.swift; sourceTree = "<group>"; };
 		3CB4AC0ED239F442001DB515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3CB4ADE56A795A31D870DEC7 /* AvaUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvaUser.swift; sourceTree = "<group>"; };
 		3CB4ADEC84B3DF7F3C27E9F0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +46,7 @@
 		3CB4AF3B3A98C2D0BEFE5E3E /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		3CB4AFDF094AD48CD130EA71 /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
 		3E887ADCC34BEF5D3D42EAC5 /* Pods-AvaChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AvaChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-AvaChallenge/Pods-AvaChallenge.release.xcconfig"; sourceTree = "<group>"; };
+		CB15F9851D599B17002865B3 /* AvaMessage+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AvaMessage+TableView.swift"; sourceTree = "<group>"; };
 		CB721F551D57F4DB00064085 /* AvaChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AvaChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -68,6 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				3CB4A0B08CBB6BA3FFFE02B5 /* UITableView+Scroll.swift */,
+				3CB4A709439EE771591B8D26 /* Bool+Int.swift */,
+				CB15F9851D599B17002865B3 /* AvaMessage+TableView.swift */,
 			);
 			path = "Helpers and Extensions";
 			sourceTree = "<group>";
@@ -84,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				3CB4A011AC766D99FA3B47C4 /* ProfileIconView.swift */,
+				3CB4AB864046131E7C171124 /* TranscriptCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -161,6 +172,7 @@
 				3CB4A4829CDE1D286BBB0D48 /* Resources */,
 				3CB4AF060C26A4E88FEF81E8 /* AV Classes */,
 				3CB4A8DF0BE51999C0B54F57 /* Info.plist */,
+				3CB4A12829E23C9D9B876045 /* DataFlowNotes */,
 			);
 			path = AvaChallenge;
 			sourceTree = "<group>";
@@ -230,6 +242,7 @@
 				3CB4A919DE3BD4FD7CEE5A26 /* Assets.xcassets in Resources */,
 				3CB4AF48B0056080FC3AD301 /* LaunchScreen.storyboard in Resources */,
 				3CB4A2131438B1240A69836D /* Main.storyboard in Resources */,
+				3CB4AFEB482D11D5AD552799 /* DataFlowNotes in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,12 +304,15 @@
 				3CB4A5B78781C0E6F3F1DEE9 /* AvaMessage.swift in Sources */,
 				3CB4A1C98116688B2DEF4945 /* AvaMessageCenter.swift in Sources */,
 				3CB4A9A5A53144B940ACAD5F /* AvaUser.swift in Sources */,
+				CB15F9861D599B17002865B3 /* AvaMessage+TableView.swift in Sources */,
 				3CB4A6312E516C3F4674CF11 /* ProfileIconView.swift in Sources */,
 				3CB4AB39ACC60FE35C3E7834 /* TranscriptionPageViewController.swift in Sources */,
 				3CB4A5AC24277C9BB701F40E /* UITableView+Scroll.swift in Sources */,
 				3CB4A7E379B5DDB720549779 /* AppDelegate.swift in Sources */,
 				3CB4AEC60668E5BFD8C55E4A /* AudioManager.swift in Sources */,
 				3CB4AC21C494EB1B848F8157 /* AudioUtils.swift in Sources */,
+				3CB4AB36AF61183C4C1108CC /* Bool+Int.swift in Sources */,
+				3CB4ABA6D67695FEF1290CDD /* TranscriptCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

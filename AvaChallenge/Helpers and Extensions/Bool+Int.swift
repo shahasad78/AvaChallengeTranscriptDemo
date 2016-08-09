@@ -4,3 +4,9 @@
 //
 
 import Foundation
+
+extension  Bool {
+    func intValue() -> Int {
+        return self ? 1 : 0
+    }
+}

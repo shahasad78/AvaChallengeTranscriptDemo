@@ -7,57 +7,139 @@
 //
 
 import Foundation
+import PubNub
 
+protocol AvaMessageCenterDelegate: class {
+    func didReceive(message: AvaMessage)
+}
 
 /// `AvaMessageCenter` is a singleton class that manages the access of
 /// Ava's PubNub Messaging service
-class AvaMessageCenter {
+class AvaMessageCenter: NSObject {
 
-    static let sharedCenter = AvaMessageCenter()
+    typealias BlocID = UInt
+    typealias JSONDictionary = [String:AnyObject] // FIXME: Unused
+    typealias CallBackFunction = () -> ()
 
-    private init() {
-        // TODO: Delete this code when PubNub is working
-        users.appendContentsOf([
-                AvaUser(userId: "011000434", userName: "Shah Martinez"),
-                AvaUser(userId: "011000435", userName: "Katie Burr")
-        ])
-
-        var currentUser: Bool = false
-        self.messages = ["Welcome to Ava",
-                         "Hey You!",
-                         "What it do Baby boo?!?",
-                         "Nothing much honey butter chicken biscuit.",
-                         "You like this app I made for the hard-of-hearing?",
-                        "Deaf-initely",
-                         "That was a terrible joke babe.",
-                         "I know, that's because YOU wrote it. lol",
-                        "Wel I won't be doing THAT again.  Geeeezus",
-                        "You know as well as I do that that is a bold faced lie.",
-                        "You know me too wel",
-                         "Hope this is enough lines",
-                        "Nope, apparently this thing needs a bunch.",
-                        "Well this should be two over on a 6 plus.",
-                        "AAaaannnd three"].map {
-            let user = users[currentUser.intValue()]
-            currentUser = !currentUser
-            return AvaMessage(user: user, messageBody: $0)
-        }
-
+    enum AvaMessageKey: String {
+        case blocId
+        case requestCommand
+        case speakerId
+        case transcript
     }
 
     /// `users` stores up to five users in chat room
     var users = [AvaUser]()
 
-    var messages = [AvaMessage]()
-    var messageCount: Int { return messages.count }
+    var messages = [BlocID:AvaMessage]()
+    var messageKeys = [BlocID]()
+    var messageCount: Int {
+        return messages.count
+    }
+
+    weak var delegate: AvaMessageCenterDelegate?
+    private var callback: CallBackFunction?
+
+    static let sharedCenter = AvaMessageCenter()
+    let client: PubNub? = {
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        return delegate.client
+    }()
+
+    private override init() {
+        super.init()
+
+        if let client = client {
+            client.addListener(self)
+        }
+    }
+
+    func addMessageCallback(_ callback: CallBackFunction) {
+        self.callback = callback
+    }
 
 
 
 
 }
 
-extension  Bool {
-    func intValue() -> Int {
-        return self ? 1 : 0
+
+
+extension AvaMessageCenter:  PNObjectEventListener {
+    func client(_ client: PubNub!, didReceiveMessage message: PNMessageResult!) {
+        if message.data.actualChannel != nil {
+
+        } else {
+
+        }
+
+
+        if let messagePacket = message.data.message,
+            let blocId = messagePacket[AvaMessageKey.blocId.rawValue] as? String,
+            let userId = messagePacket[AvaMessageKey.speakerId.rawValue] as? String,
+            let transcript = messagePacket[AvaMessageKey.transcript.rawValue] as? String {
+
+            guard let blocId = UInt(blocId) else { return }
+            let avaMessage  = AvaMessage(user: AvaUser(userId: userId, userName: "User"), messageBody: transcript)
+            messages[blocId] = avaMessage
+            if blocId != messageKeys.last {
+                messageKeys.append(blocId)
+            }
+            if let callback = callback { callback() }
+//            print(messagePacket)
+
+//            do {
+//                try avaMessage = messa
+//            }
+
+
+        }
+//        if let messageData = NSJSONSerialization.dataWithJSONObject(message.data, options: [.PrettyPrinted]) {
+//            // Check if blocId exists in array and either overwrite existing AvaMessage or add new.
+//
+//            guard let blockId = UInt(messageData[AvaMessageKey.blocId.rawValue] as! String) else { return }
+//            if var message = messages[blockId] {
+//                message.messageBody = messageData[AvaMessageKey.transcript.rawValue] as? String
+//            } else {
+//                messageKeys.append(blockId)
+//                let user = AvaUser(userId: "00001aa2", userName: "Shah Martinez")
+//                let avaMessage = AvaMessage(user: user, messageBody: messageData[AvaMessageKey.transcript.rawValue] as! String)
+//                messages[blockId] = avaMessage
+//            }
+//
+//
+//        }
+//        print("Received message: \(message.data.message) on channel " +
+//                "\((message.data.actualChannel ?? message.data.subscribedChannel)!) at " +
+//                "\(message.data.timetoken)")
+
     }
+
+    func client(_ client: PubNub!, didReceivePresenceEvent event: PNPresenceEventResult!) {
+        print(event.data)
+
+    }
+
+    func client(_ client: PubNub!, didReceiveStatus status: PNStatus!) {
+        // Select last object from list of channels and send message to it.
+        let targetChannel = "00001aa2"
+        client.publish("Hello from the AvaChallenge Test Device", toChannel: targetChannel,
+                compressed: false, withCompletion: { (status) -> Void in
+
+            if !status.error {
+
+                // Message successfully published to specified channel.
+            } else {
+
+                // Handle message publish error. Check 'category' property
+                // to find out possible reason because of which request did fail.
+                // Review 'errorData' property (which has PNErrorData data type) of status
+                // object to get additional information about issue.
+                //
+                // Request can be resent using: status.retry()
+            }
+        })
+
+    }
+
 }
