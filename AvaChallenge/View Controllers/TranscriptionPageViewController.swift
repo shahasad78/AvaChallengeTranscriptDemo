@@ -11,6 +11,7 @@ import UIKit
 class TranscriptionPageViewController: UIViewController {
 
     let messageCenter = AvaMessageCenter.sharedCenter
+    let audioManager = AudioManager()
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -26,7 +27,10 @@ class TranscriptionPageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    override func viewDidAppear(_ animated: Bool)  {
+        super.viewDidAppear(animated)
+        tableView.scrollToBottom()
+    }
 }
 
 extension TranscriptionPageViewController: UITableViewDataSource {
