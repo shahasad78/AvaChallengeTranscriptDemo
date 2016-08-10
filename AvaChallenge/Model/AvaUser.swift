@@ -16,3 +16,14 @@ class AvaUser {
     }
 
 }
+
+// MARK: - Equatable Protocol
+func ==(lhs: AvaUser, rhs: AvaUser) -> Bool {
+    return lhs.userId == rhs.userId
+}
+extension AvaUser: Equatable { }
+
+// MARK: - Hashable Protocol
+extension AvaUser: Hashable {
+    var hashValue: Int { return userId.hashValue }
+}

@@ -13,12 +13,16 @@ protocol AvaMessageCenterDelegate {
     func didReceive(message: AvaMessage)
 }
 
+typealias BlocID = UInt
+typealias UserID = String
+typealias UserName = String
+
 /// `AvaMessageCenter` is a singleton class that manages the access of
 /// Ava's PubNub Messaging service
 class AvaMessageCenter: NSObject {
 
-    typealias BlocID = UInt
     typealias JSONDictionary = [String:AnyObject] // FIXME: Unused
+    typealias MessageClusterKey = (userId: UserID, userName: UserName)
     typealias CallBackFunction = (Bool) -> ()
 
     enum AvaMessageKey: String {
@@ -33,8 +37,10 @@ class AvaMessageCenter: NSObject {
 
     var messages = [BlocID:AvaMessage]()
     var messageKeys = [BlocID]()
-    var messageCount: Int {
-        return messages.count
+    var messageClusterKeys = [AvaUser]()
+    var messageClusters = [AvaMessageCluster]()
+    var clusterCount: Int {
+        return messageClusters.count
     }
 
     var delegate: AvaMessageCenterDelegate?
@@ -78,14 +84,38 @@ extension AvaMessageCenter:  PNObjectEventListener {
             let userId = messagePacket[AvaMessageKey.speakerId.rawValue] as? String,
             let transcript = messagePacket[AvaMessageKey.transcript.rawValue] as? String {
 
+            // ---------------------
+            // Flags
+            // ---------------------
             var isNewMessage = false
+            var isNewUser = false
+            // =====================
+
+
             guard let blocId = UInt(blocId) else { return }
-            let avaMessage  = AvaMessage(user: AvaUser(userId: userId, userName: "User"), messageBody: transcript)
-            messages[blocId] = avaMessage
-            if blocId != messageKeys.last {
-                messageKeys.append(blocId)
-                isNewMessage = true
+            let avaMessage  = AvaMessage(user: AvaUser(userId: userId, userName: "User"), blocId: blocId , messageBody: transcript)
+
+            var currentCluster: AvaMessageCluster
+            if let _ = messageClusters.last {
+                currentCluster = messageClusters.last!
+            } else {
+                currentCluster = AvaMessageCluster(user: avaMessage.user, message: avaMessage)
+                return
             }
+
+            // if newUser add New CLuster
+            if avaMessage.user != messageClusters.last!.user {
+                isNewUser = true
+                isNewMessage = true
+                let newCluster = AvaMessageCluster(user: avaMessage.user, message: avaMessage)
+                messageClusters.append(newCluster)
+            } else { // Not a new user, add message to existing cluster
+                if blocId != currentCluster.currentBlocID { isNewMessage = true }
+                currentCluster.add(message: avaMessage)
+            }
+
+
+            // else append message to current cluster
             if let callback = callback { callback(isNewMessage) }
 
 

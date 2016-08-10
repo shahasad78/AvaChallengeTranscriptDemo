@@ -56,11 +56,11 @@ class TranscriptionPageViewController: UIViewController {
 extension TranscriptionPageViewController: UITableViewDataSource {
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return messageCenter.clusterCount
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messageCenter.messageCount
+        return messageCenter.messageClusters[section].messageCount
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -71,11 +71,7 @@ extension TranscriptionPageViewController: UITableViewDataSource {
             if indexPath.row > 0 {
                 let previousIndexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
                 if let previousMessage = messageCenter.message(atIndexPath: previousIndexPath) {
-//                    if message.user.userId == previousMessage.user.userId { cell.userLabel.removeFromSuperview() }
                     cell.userLabel.hidden = message.user.userId == previousMessage.user.userId
-//                    if message.user.userId != previousMessage.user.userId {
-//                        userName = message.user.userName
-//                    }
                 }
             } else {
                 userName = message.user.userName

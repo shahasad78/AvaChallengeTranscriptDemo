@@ -7,5 +7,18 @@ import Foundation
 
 struct AvaMessage {
     let user: AvaUser
+    let blocId: BlocID
     var messageBody: String?
+}
+
+
+// MARK: - Equatable Protocol
+func ==(lhs: AvaMessage, rhs: AvaMessage) -> Bool {
+    return lhs.blocId == rhs.blocId
+}
+extension AvaMessage: Equatable { }
+
+// MARK: Hashable Protocol
+extension AvaMessage: Hashable {
+    var hashValue: Int { return blocId.hashValue }
 }

@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -38,7 +39,7 @@
                                             </mask>
                                         </variation>
                                     </button>
-                                    <view contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="M0c-bj-jjX" userLabel="User Icon" customClass="ProfileIconView" customModule="AvaChallenge" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M0c-bj-jjX" userLabel="User Icon" customClass="ProfileIconView" customModule="AvaChallenge" customModuleProvider="target">
                                         <rect key="frame" x="20" y="10" width="70" height="70"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -113,33 +114,46 @@
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="80" id="dYu-jy-5aG"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RcG-nZ-6wt">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RcG-nZ-6wt">
                                 <rect key="frame" x="0.0" y="110" width="600" height="441"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatCell" textLabel="lb4-Mc-Tqh" detailTextLabel="Nau-su-7zJ" rowHeight="40" style="IBUITableViewCellStyleSubtitle" id="6Hs-rN-of8">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="40"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="248" verticalCompressionResistancePriority="250" selectionStyle="default" indentationWidth="10" reuseIdentifier="TranscriptCell" rowHeight="67" id="6Hs-rN-of8" customClass="TranscriptCell" customModule="AvaChallenge" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Hs-rN-of8" id="G89-pF-Ld5">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="39.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="248" verticalCompressionResistancePriority="250" tableViewCell="6Hs-rN-of8" id="G89-pF-Ld5">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="66.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lb4-Mc-Tqh">
-                                                    <rect key="frame" x="15" y="4" width="31.5" height="19.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzN-Fk-I6R" userLabel="User Label">
+                                                    <rect key="frame" x="16" y="8" width="568" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                    <color key="textColor" red="0.015438519939999999" green="0.5742234906" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nau-su-7zJ">
-                                                    <rect key="frame" x="15" y="23.5" width="40.5" height="13.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="999" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="This is where the transcript text will go" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVE-it-Q7I">
+                                                    <rect key="frame" x="16" y="29" width="568" height="29.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="0.10264922092956487" green="0.25504444380455604" blue="0.35250946969696972" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="IVE-it-Q7I" firstAttribute="top" relation="lessThanOrEqual" secondItem="G89-pF-Ld5" secondAttribute="topMargin" constant="22" id="0ok-iz-q9b"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="IVE-it-Q7I" secondAttribute="trailing" constant="8" id="5fb-0f-Bhd"/>
+                                                <constraint firstItem="tzN-Fk-I6R" firstAttribute="top" secondItem="G89-pF-Ld5" secondAttribute="topMargin" id="JRu-kE-6JZ"/>
+                                                <constraint firstItem="IVE-it-Q7I" firstAttribute="top" secondItem="tzN-Fk-I6R" secondAttribute="bottom" constant="4" id="hdO-V2-MQw"/>
+                                                <constraint firstItem="tzN-Fk-I6R" firstAttribute="centerX" secondItem="IVE-it-Q7I" secondAttribute="centerX" id="jgi-dU-rII"/>
+                                                <constraint firstItem="tzN-Fk-I6R" firstAttribute="width" secondItem="IVE-it-Q7I" secondAttribute="width" id="k8Q-au-hkl"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="IVE-it-Q7I" secondAttribute="bottom" id="loM-bD-cv9"/>
+                                                <constraint firstItem="IVE-it-Q7I" firstAttribute="leading" secondItem="G89-pF-Ld5" secondAttribute="leadingMargin" constant="8" id="p5g-Pt-MCx"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="transcriptTextView" destination="IVE-it-Q7I" id="Voo-Jd-0Ps"/>
+                                            <outlet property="userLabel" destination="tzN-Fk-I6R" id="6Qf-gs-zso"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <variation key="widthClass=compact" misplaced="YES">
