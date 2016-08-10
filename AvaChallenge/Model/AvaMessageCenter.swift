@@ -9,7 +9,7 @@
 import Foundation
 import PubNub
 
-protocol AvaMessageCenterDelegate: class {
+protocol AvaMessageCenterDelegate {
     func didReceive(message: AvaMessage)
 }
 
@@ -19,7 +19,7 @@ class AvaMessageCenter: NSObject {
 
     typealias BlocID = UInt
     typealias JSONDictionary = [String:AnyObject] // FIXME: Unused
-    typealias CallBackFunction = () -> ()
+    typealias CallBackFunction = (Bool) -> ()
 
     enum AvaMessageKey: String {
         case blocId
@@ -37,7 +37,7 @@ class AvaMessageCenter: NSObject {
         return messages.count
     }
 
-    weak var delegate: AvaMessageCenterDelegate?
+    var delegate: AvaMessageCenterDelegate?
     private var callback: CallBackFunction?
 
     static let sharedCenter = AvaMessageCenter()
@@ -73,42 +73,25 @@ extension AvaMessageCenter:  PNObjectEventListener {
 
         }
 
-
         if let messagePacket = message.data.message,
             let blocId = messagePacket[AvaMessageKey.blocId.rawValue] as? String,
             let userId = messagePacket[AvaMessageKey.speakerId.rawValue] as? String,
             let transcript = messagePacket[AvaMessageKey.transcript.rawValue] as? String {
 
+            var isNewMessage = false
             guard let blocId = UInt(blocId) else { return }
             let avaMessage  = AvaMessage(user: AvaUser(userId: userId, userName: "User"), messageBody: transcript)
             messages[blocId] = avaMessage
             if blocId != messageKeys.last {
                 messageKeys.append(blocId)
+                isNewMessage = true
             }
-            if let callback = callback { callback() }
-//            print(messagePacket)
+            if let callback = callback { callback(isNewMessage) }
 
-//            do {
-//                try avaMessage = messa
-//            }
 
 
         }
-//        if let messageData = NSJSONSerialization.dataWithJSONObject(message.data, options: [.PrettyPrinted]) {
-//            // Check if blocId exists in array and either overwrite existing AvaMessage or add new.
-//
-//            guard let blockId = UInt(messageData[AvaMessageKey.blocId.rawValue] as! String) else { return }
-//            if var message = messages[blockId] {
-//                message.messageBody = messageData[AvaMessageKey.transcript.rawValue] as? String
-//            } else {
-//                messageKeys.append(blockId)
-//                let user = AvaUser(userId: "00001aa2", userName: "Shah Martinez")
-//                let avaMessage = AvaMessage(user: user, messageBody: messageData[AvaMessageKey.transcript.rawValue] as! String)
-//                messages[blockId] = avaMessage
-//            }
-//
-//
-//        }
+
 //        print("Received message: \(message.data.message) on channel " +
 //                "\((message.data.actualChannel ?? message.data.subscribedChannel)!) at " +
 //                "\(message.data.timetoken)")

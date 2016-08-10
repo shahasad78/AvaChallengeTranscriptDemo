@@ -15,20 +15,31 @@ class TranscriptionPageViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    var heightAtIndexPath = [NSIndexPath:CGFloat]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // -------------------------
+        // Setup TableView
+        // -------------------------
         tableView.dataSource = self
         tableView.separatorColor = UIColor.clearColor()
+        tableView.rowHeight = UITableViewAutomaticDimension
 
-        messageCenter.addMessageCallback({ [weak self] in
-            dispatch_async(dispatch_get_main_queue()) { [weak self] in
+        // -------------------------
+        // Setup AvaMessageCenter
+        // -------------------------
+        messageCenter.addMessageCallback({ [weak self] (isNewMessage) in
+            dispatch_async(dispatch_get_main_queue()) {
                 self?.tableView.reloadData()
-                // TODO: Fix jerky scrolling
-                self?.tableView.scrollToBottom()
+                if isNewMessage {
+                    self?.tableView.scrollToBottom()
+                }
             }
         })
 
-        tableView.estimatedRowHeight = 22
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,27 +64,30 @@ extension TranscriptionPageViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ChatCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(String(TranscriptCell), forIndexPath: indexPath) as! TranscriptCell
         // If the user is different than the user from the previous post, Display the user name.
         if let message = messageCenter.message(atIndexPath: indexPath) {
             var userName: String? = nil
             if indexPath.row > 0 {
                 let previousIndexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
                 if let previousMessage = messageCenter.message(atIndexPath: previousIndexPath) {
-                    if message.user.userId != previousMessage.user.userId {
-                        userName = message.user.userName
-                    }
+//                    if message.user.userId == previousMessage.user.userId { cell.userLabel.removeFromSuperview() }
+                    cell.userLabel.hidden = message.user.userId == previousMessage.user.userId
+//                    if message.user.userId != previousMessage.user.userId {
+//                        userName = message.user.userName
+//                    }
                 }
             } else {
                 userName = message.user.userName
             }
-            cell.textLabel?.text = userName
-            cell.detailTextLabel?.text = message.messageBody
+            cell.userLabel?.text = userName
+            cell.transcriptTextView?.text = message.messageBody
         }
 
-//        cell.separatorInset = UIEdgeInsets(top: 0, left: tableView.bounds.size.width, bottom: 0, right: 0)
         return cell
     }
+
+
 }
 
 extension  TranscriptionPageViewController: UITableViewDelegate {
@@ -82,7 +96,21 @@ extension  TranscriptionPageViewController: UITableViewDelegate {
     }
 
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        // TODO: Remove seleced text from speech Queue. Disable speech button
+        // TODO: Remove selected text from speech Queue. Disable speech button
     }
+
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if let height = heightAtIndexPath[indexPath] {
+            return height
+        } else {
+            return UITableViewAutomaticDimension
+        }
+    }
+
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let height = cell.frame.height
+        heightAtIndexPath[indexPath] = height
+    }
+
 
 }
