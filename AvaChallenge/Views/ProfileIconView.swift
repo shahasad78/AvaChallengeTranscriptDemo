@@ -15,7 +15,7 @@ class ProfileIconView: UIView {
     let fontSize: CGFloat = {
         let scaleCoefficient = UIScreen.mainScreen().nativeScale
         let screenBounds = UIScreen.mainScreen().nativeBounds
-        return screenBounds.height <= 960 ? 36 : 52
+        return screenBounds.height <= 960 ? 14 : 18
     }()
 
     @IBInspectable var name: String = "" {

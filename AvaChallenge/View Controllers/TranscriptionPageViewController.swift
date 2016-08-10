@@ -23,9 +23,16 @@ class TranscriptionPageViewController: UIViewController {
         // -------------------------
         // Setup TableView
         // -------------------------
+        let nib = UINib(nibName: String(TranscriptHeaderView), bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: String(TranscriptHeaderView))
+
         tableView.dataSource = self
+        tableView.delegate = self
+
         tableView.separatorColor = UIColor.clearColor()
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 20
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
 
         // -------------------------
         // Setup AvaMessageCenter
@@ -47,7 +54,7 @@ class TranscriptionPageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewDidAppear(_ animated: Bool)  {
+    override func viewDidAppear(animated: Bool)  {
         super.viewDidAppear(animated)
 //        tableView.scrollToBottom()
     }
@@ -67,21 +74,11 @@ extension TranscriptionPageViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier(String(TranscriptCell), forIndexPath: indexPath) as! TranscriptCell
         // If the user is different than the user from the previous post, Display the user name.
         if let message = messageCenter.message(atIndexPath: indexPath) {
-            var userName: String? = nil
-            if indexPath.row > 0 {
-                let previousIndexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
-                if let previousMessage = messageCenter.message(atIndexPath: previousIndexPath) {
-                    cell.userLabel.hidden = message.user.userId == previousMessage.user.userId
-                }
-            } else {
-                userName = message.user.userName
-            }
-            cell.userLabel?.text = userName
             cell.transcriptTextView?.text = message.messageBody
         }
-
         return cell
     }
+
 
 
 }
@@ -106,6 +103,16 @@ extension  TranscriptionPageViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let height = cell.frame.height
         heightAtIndexPath[indexPath] = height
+    }
+
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // FIXME:  This cell is nil
+        let cell = tableView.dequeueReusableHeaderFooterViewWithIdentifier(String(TranscriptHeaderView))
+        if let header = cell as? TranscriptHeaderView {
+            header.userNameLabel.text = messageCenter.titleForSection(section)
+            return header
+        }
+        return cell
     }
 
 

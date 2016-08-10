@@ -60,7 +60,7 @@ class AvaMessageCenter: NSObject {
         }
     }
 
-    func addMessageCallback(_ callback: CallBackFunction) {
+    func addMessageCallback(callback: CallBackFunction) {
         self.callback = callback
     }
 
@@ -100,11 +100,15 @@ extension AvaMessageCenter:  PNObjectEventListener {
                 currentCluster = messageClusters.last!
             } else {
                 currentCluster = AvaMessageCluster(user: avaMessage.user, message: avaMessage)
+                messageClusters.append(currentCluster)
+                isNewUser = true
+                // else append message to current cluster
+                if let callback = callback { callback(isNewUser) }
                 return
             }
 
             // if newUser add New CLuster
-            if avaMessage.user != messageClusters.last!.user {
+            if avaMessage.user != currentCluster.user {
                 isNewUser = true
                 isNewMessage = true
                 let newCluster = AvaMessageCluster(user: avaMessage.user, message: avaMessage)
@@ -116,7 +120,7 @@ extension AvaMessageCenter:  PNObjectEventListener {
 
 
             // else append message to current cluster
-            if let callback = callback { callback(isNewMessage) }
+            if let callback = callback { callback(isNewUser) }
 
 
 

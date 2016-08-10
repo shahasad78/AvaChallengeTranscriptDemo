@@ -14,4 +14,9 @@ extension AvaMessageCenter {
         let cluster = messageClusters[indexPath.section]
         return cluster[indexPath.row]
     }
+
+    func titleForSection(section: Int) -> String? {
+        guard section < messageClusters.count else { return nil }
+        return messageClusters[section].user.userName
+    }
 }

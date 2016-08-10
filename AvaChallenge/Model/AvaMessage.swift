@@ -12,6 +12,20 @@ struct AvaMessage {
 }
 
 
+extension AvaMessage: CustomStringConvertible {
+    var description: String {
+        return "Message: \n" + "--------\n" + "Userid: \(user.userId)\n" +
+            "username: \(user.userName)\n" + "blocId: \(blocId)" +
+        "\(messageBody)"
+    }
+}
+
+extension AvaMessage: CustomDebugStringConvertible {
+    var debugDescription: String {
+        return description
+    }
+}
+
 // MARK: - Equatable Protocol
 func ==(lhs: AvaMessage, rhs: AvaMessage) -> Bool {
     return lhs.blocId == rhs.blocId
