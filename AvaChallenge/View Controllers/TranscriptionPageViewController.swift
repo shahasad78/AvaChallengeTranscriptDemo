@@ -33,6 +33,7 @@ class TranscriptionPageViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 20
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        // ===========================================================
 
         // -------------------------
         // Setup AvaMessageCenter
@@ -45,19 +46,33 @@ class TranscriptionPageViewController: UIViewController {
                 }
             }
         })
-
+        // ==========================
 
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    override func viewDidAppear(animated: Bool)  {
-        super.viewDidAppear(animated)
-//        tableView.scrollToBottom()
-    }
+//    // MARK: - Text Selection Methods
+//    func setupGestureRecognizer(textView: UITextView) {
+//        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+//        tapRecognizer.numberOfTapsRequired = 1
+//        textView.addGestureRecognizer(tapRecognizer)
+//    }
+//
+//    func handleTap(recognizer: UITapGestureRecognizer) {
+//        print("Word Tapped: ")
+//        if let textView = recognizer.view as? UITextView {
+//            let tapLocationInView: CGPoint = recognizer.locationInView(textView)
+//            let position = CGPoint(x: tapLocationInView.x, y: tapLocationInView.y)
+//            // get location of selected text at the tap position
+//            if let tapPosition: UITextPosition = textView.closestPositionToPoint(position),
+//                let selectedTextRange = textView.tokenizer.rangeEnclosingPosition(tapPosition,
+//                                                                                            withGranularity: .Word,
+//                                                                                            inDirection: UITextLayoutDirection.Right.rawValue),
+//                let tappedWord = textView.textInRange(selectedTextRange) {
+//                print(tappedWord)
+//            }
+//
+//        }
+//    }
 }
 
 extension TranscriptionPageViewController: UITableViewDataSource {
@@ -76,11 +91,9 @@ extension TranscriptionPageViewController: UITableViewDataSource {
         if let message = messageCenter.message(atIndexPath: indexPath) {
             cell.transcriptTextView?.text = message.messageBody
         }
+//        setupGestureRecognizer(cell.transcriptTextView)
         return cell
     }
-
-
-
 }
 
 extension  TranscriptionPageViewController: UITableViewDelegate {

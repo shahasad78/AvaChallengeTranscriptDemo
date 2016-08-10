@@ -17,15 +17,23 @@ typealias BlocID = UInt
 typealias UserID = String
 typealias UserName = String
 
-/// `AvaMessageCenter` is a singleton class that manages the access of
+
+///
+/// AvaMessageCenter
+/// ================
+/// `AvaMessageCenter` is a *singleton* class that manages the access to
 /// Ava's PubNub Messaging service
+///
+///
+/// You can register a callBack with the message center by using the `addCallBack(_:)` method.  
+/// This callback will be called when a message is received from the server.
+/// * * * * * *
+/// - Author: Richard 'Shah' Martinez
 class AvaMessageCenter: NSObject {
 
-    typealias JSONDictionary = [String:AnyObject] // FIXME: Unused
-    typealias MessageClusterKey = (userId: UserID, userName: UserName)
     typealias CallBackFunction = (Bool) -> ()
 
-    enum AvaMessageKey: String {
+    private enum AvaMessageKey: String {
         case blocId
         case requestCommand
         case speakerId
@@ -33,18 +41,14 @@ class AvaMessageCenter: NSObject {
     }
 
     /// `users` stores up to five users in chat room
-    var users = [AvaUser]()
-
-    var messages = [BlocID:AvaMessage]()
-    var messageKeys = [BlocID]()
-    var messageClusterKeys = [AvaUser]()
+    private(set) var users = [AvaUser]() // TODO: Populate Current Users in chatroom
     var messageClusters = [AvaMessageCluster]()
     var clusterCount: Int {
         return messageClusters.count
     }
 
     var delegate: AvaMessageCenterDelegate?
-    private var callback: CallBackFunction?
+    private var callback: CallBackFunction? // TODO: Make this a one->many relationship
 
     static let sharedCenter = AvaMessageCenter()
     let client: PubNub? = {
@@ -60,13 +64,10 @@ class AvaMessageCenter: NSObject {
         }
     }
 
+
     func addMessageCallback(callback: CallBackFunction) {
         self.callback = callback
     }
-
-
-
-
 }
 
 
@@ -121,9 +122,6 @@ extension AvaMessageCenter:  PNObjectEventListener {
 
             // else append message to current cluster
             if let callback = callback { callback(isNewUser) }
-
-
-
         }
 
 //        print("Received message: \(message.data.message) on channel " +

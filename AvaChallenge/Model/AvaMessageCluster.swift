@@ -8,17 +8,26 @@
 
 import Foundation
 
+// TODO: Conform AvaMessageCluster to CollectionType
+
+/// An `AvaMessageCluster` stores all of the contiguous messages sent by a given user
+/// Messages can be retrieved using subscripts of types `BlocID` and `Int`
+/// - example:
+/// ```
+/// let lastMessage = cluster[cluster.messageCount - 1]
+/// ```
 class AvaMessageCluster {
 
     let user: AvaUser
-    var messages: [BlocID: AvaMessage]
+    private var messages: [BlocID: AvaMessage]
 
     private var messageKeys = [BlocID]()
+
     // ---------------------------------
     // Convenience Properties
     // ---------------------------------
     var userId: UserID { return user.userId }
-    var messageCount: Int { return messageKeys.count }
+    var messageCount: Int { return messages.count }
     var currentBlocID: BlocID? { return messages.keys.sort().last }
     var cluster: [AvaMessage] { return messageKeys.map { messages[$0]! } }
     var stringCluster: [String] { return messageKeys.map { (messages[$0]?.messageBody)! } }
@@ -43,8 +52,12 @@ class AvaMessageCluster {
         let isNewMessage =  messages[message.blocId] == nil
         if isNewMessage { messageKeys.append(message.blocId) }
         messages[message.blocId] = message
-//        print("Adding Message: \(message)")
-        print(messages)
+    }
+
+    subscript(blocId: BlocID) -> AvaMessage? {
+        get {
+            return messages[blocId]
+        }
     }
 
     subscript(index: Int) -> AvaMessage? {
@@ -53,8 +66,5 @@ class AvaMessageCluster {
             let key = messageKeys[index]
             return messages[key]
         }
-
     }
-
-
 }

@@ -7,7 +7,6 @@ import UIKit
 
 class TranscriptCell: UITableViewCell {
 
-    @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var transcriptTextView: UITextView!
 
     // MARK: - Initializers
@@ -18,17 +17,24 @@ class TranscriptCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+//        setupCell()
+    }
+
+    override func willMoveToSuperview(newSuperview: UIView?) {
+        super.willMoveToSuperview(newSuperview)
+        setupCell()
     }
 
     // MARK: - Setup Methods
     func setupCell() {
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tapRecognizer.numberOfTapsRequired = 1
         transcriptTextView.addGestureRecognizer(tapRecognizer)
     }
 
     func handleTap(recognizer: UITapGestureRecognizer) {
         if let textView = recognizer.view as? UITextView {
+            print("Word Tapped: ")
             let tapLocationInView: CGPoint = recognizer.locationInView(textView)
             let position = CGPoint(x: tapLocationInView.x, y: tapLocationInView.y)
             // get location of selected text at the tap position

@@ -5,6 +5,14 @@
 
 import Foundation
 
+///
+/// AvaMessage
+/// ================
+/// `AvaMessag` is a struct that encapsulates the message data received from
+/// Ava's PubNub Messaging service
+///
+/// * * * * * *
+/// - Author: Richard 'Shah' Martinez
 struct AvaMessage {
     let user: AvaUser
     let blocId: BlocID

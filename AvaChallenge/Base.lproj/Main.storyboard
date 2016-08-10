@@ -128,8 +128,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="21.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="This is where the transcript text will go" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVE-it-Q7I">
-                                                    <rect key="frame" x="16" y="0.0" width="568" height="39.5"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="This is where the transcript text will go" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVE-it-Q7I">
+                                                    <rect key="frame" x="16" y="0.0" width="568" height="21.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" red="0.10264922092956487" green="0.25504444380455604" blue="0.35250946969696972" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>

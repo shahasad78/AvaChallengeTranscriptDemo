@@ -5,6 +5,13 @@
 
 import Foundation
 
+///
+/// AvaUser
+/// =======
+/// `AvaUser` is a lightweight abstraction of an AvaUser
+///
+/// * * * * * *
+/// - Author: Richard 'Shah' Martinez
 class AvaUser {
 
     let userId: String
