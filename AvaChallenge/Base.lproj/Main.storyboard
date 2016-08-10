@@ -91,7 +91,7 @@
                                                 <state key="normal" image="keyboard_icon"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvc-Ys-HeJ" userLabel="Mic Button">
-                                                <rect key="frame" x="276" y="0.0" width="12" height="23"/>
+                                                <rect key="frame" x="277" y="0.0" width="12" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="uvc-Ys-HeJ" secondAttribute="height" multiplier="1:2" id="8OW-m3-INn"/>
                                                 </constraints>
@@ -99,7 +99,7 @@
                                                 <state key="normal" image="mic_icon"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ouy-iw-PQA" userLabel="Speech Buton">
-                                                <rect key="frame" x="530" y="0.0" width="31" height="23"/>
+                                                <rect key="frame" x="530" y="0.0" width="30" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Ouy-iw-PQA" secondAttribute="height" multiplier="195:150" id="hNu-1x-qZj"/>
                                                 </constraints>
