@@ -40,6 +40,15 @@ class AvaMessageCenter: NSObject {
         case transcript
     }
 
+    /// PubNub object handles connection to PubNub server.
+    private var client: PubNub?
+//    = {
+//        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        return delegate.client
+//    }()
+
+    private var userId: UserID?
+
     /// `users` stores up to five users in chat room
     private(set) var users = [AvaUser]() // TODO: Populate Current Users in chatroom
     var messageClusters = [AvaMessageCluster]()
@@ -47,31 +56,54 @@ class AvaMessageCenter: NSObject {
         return messageClusters.count
     }
 
+    // ----------------------------------------
+    // DELEGATES AND CALLBACKS
+    // ----------------------------------------
     var delegate: AvaMessageCenterDelegate?
     private var callback: CallBackFunction? // TODO: Make this a one->many relationship
 
+    /// Singleton instance of AvaMessageCenter.
     static let sharedCenter = AvaMessageCenter()
-    let client: PubNub? = {
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        return delegate.client
-    }()
 
+
+
+    // ----------------------------------------
+    // INITIALIZERS
+    // ----------------------------------------
     private override init() {
         super.init()
 
-        if let client = client {
-            client.addListener(self)
+        if let clientInfoPath = NSBundle.mainBundle().pathForResource("ClientInfo", ofType: "plist"),
+           let clientInfo = NSDictionary(contentsOfURL: NSURL(fileURLWithPath: clientInfoPath)) {
+            self.userId = clientInfo["userId"] as! UserID // TODO: Remove "stringly"-typed value
         }
+
+        let configuration = PNConfiguration(publishKey: "pub-c-6590f75c-b2bb-4acc-9922-d5fe5aa8dec9",
+        subscribeKey: "sub-c-897a7150-da55-11e5-9ce2-0619f8945a4f")
+        configuration.uuid = self.userId ?? ""
+        self.client = PubNub.clientWithConfiguration(configuration)
+        client?.addListener(self)
+
+        self.client?.subscribeToChannels([self.userId ?? ""], withPresence: true)
+
+
+
+
     }
+    // ========================================
 
-
+    // ----------------------------------------
+    // ACCESSORS
+    // ----------------------------------------
     func addMessageCallback(callback: CallBackFunction) {
         self.callback = callback
     }
+    // ========================================
 }
 
-
-
+// -----------------------------------------------------
+// MARK: - PubNub EventListener Callback Methods
+// -----------------------------------------------------
 extension AvaMessageCenter:  PNObjectEventListener {
     func client(_ client: PubNub!, didReceiveMessage message: PNMessageResult!) {
         if message.data.actualChannel != nil {
@@ -137,24 +169,27 @@ extension AvaMessageCenter:  PNObjectEventListener {
 
     func client(_ client: PubNub!, didReceiveStatus status: PNStatus!) {
         // Select last object from list of channels and send message to it.
-        let targetChannel = "00001aa2"
-        client.publish("Hello from the AvaChallenge Test Device", toChannel: targetChannel,
-                compressed: false, withCompletion: { (status) -> Void in
+        if let targetChannel = self.userId {
+            client.publish("Hello from the AvaChallenge Test Device", toChannel: targetChannel,
+                    compressed: false, withCompletion: { (status) -> Void in
 
-            if !status.error {
+                if !status.error {
 
-                // Message successfully published to specified channel.
-            } else {
+                    // Message successfully published to specified channel.
+                } else {
 
-                // Handle message publish error. Check 'category' property
-                // to find out possible reason because of which request did fail.
-                // Review 'errorData' property (which has PNErrorData data type) of status
-                // object to get additional information about issue.
-                //
-                // Request can be resent using: status.retry()
-            }
-        })
+                    // Handle message publish error. Check 'category' property
+                    // to find out possible reason because of which request did fail.
+                    // Review 'errorData' property (which has PNErrorData data type) of status
+                    // object to get additional information about issue.
+                    //
+                    // Request can be resent using: status.retry()
+                }
+            })
+        }
 
     }
 
 }
+// =====================================================
+

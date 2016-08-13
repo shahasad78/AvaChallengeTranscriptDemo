@@ -15,59 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
 
     var window: UIWindow?
 
-    var client: PubNub?
-
-    override init() {
-        super.init()
-
-        let configuration = PNConfiguration(publishKey: "pub-c-6590f75c-b2bb-4acc-9922-d5fe5aa8dec9",
-                                          subscribeKey: "sub-c-897a7150-da55-11e5-9ce2-0619f8945a4f")
-        self.client = PubNub.clientWithConfiguration(configuration)
-
-        configuration.uuid = "00001aa2"
-//        self.client?.addListener(self)
-    }
-
-    func client(_ client: PubNub!, didReceiveMessage message: PNMessageResult!) {
-        if message.data.actualChannel != nil {
-
-        } else {
-
-        }
-
-        print("Received message: \(message.data.message) on channel " +
-                "\((message.data.actualChannel ?? message.data.subscribedChannel)!) at " +
-                "\(message.data.timetoken)")
-    }
-
-    func client(_ client: PubNub!, didReceivePresenceEvent event: PNPresenceEventResult!) {
-    }
-
-    func client(_ client: PubNub!, didReceiveStatus status: PNStatus!) {
-        // Select last object from list of channels and send message to it.
-        let targetChannel = "00001aa2"
-        client.publish("Hello from the AvaChallenge Test Device", toChannel: targetChannel,
-                compressed: false, withCompletion: { (status) -> Void in
-
-            if !status.error {
-
-                // Message successfully published to specified channel.
-            } else {
-
-                // Handle message publish error. Check 'category' property
-                // to find out possible reason because of which request did fail.
-                // Review 'errorData' property (which has PNErrorData data type) of status
-                // object to get additional information about issue.
-                //
-                // Request can be resent using: status.retry()
-            }
-        })
-    }
-
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         registerDefaults()
-        self.client?.subscribeToChannels(["00001aa2"], withPresence: true)
+        // Instantiate AvaMessengerCenter to ensure connection to the network at App Launch.
+        let messageCenter = AvaMessageCenter.sharedCenter
         return true
     }
 

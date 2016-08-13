@@ -13,6 +13,7 @@
 		3CB4A5AC24277C9BB701F40E /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4A0B08CBB6BA3FFFE02B5 /* UITableView+Scroll.swift */; };
 		3CB4A5B78781C0E6F3F1DEE9 /* AvaMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4A1F5D5052D3D7ECD94DF /* AvaMessage.swift */; };
 		3CB4A6312E516C3F4674CF11 /* ProfileIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4A011AC766D99FA3B47C4 /* ProfileIconView.swift */; };
+		3CB4A6DFBB930A0115443352 /* ClientInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CB4AD262A9269E714471675 /* ClientInfo.plist */; };
 		3CB4A7E379B5DDB720549779 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4ADEC84B3DF7F3C27E9F0 /* AppDelegate.swift */; };
 		3CB4A919DE3BD4FD7CEE5A26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CB4AE4D8EFB2E01E7820279 /* Assets.xcassets */; };
 		3CB4A9A5A53144B940ACAD5F /* AvaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4ADE56A795A31D870DEC7 /* AvaUser.swift */; };
@@ -43,6 +44,7 @@
 		3CB4A8DF0BE51999C0B54F57 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		3CB4AB864046131E7C171124 /* TranscriptCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranscriptCell.swift; sourceTree = "<group>"; };
 		3CB4AC0ED239F442001DB515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3CB4AD262A9269E714471675 /* ClientInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = ClientInfo.plist; sourceTree = "<group>"; };
 		3CB4ADE56A795A31D870DEC7 /* AvaUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvaUser.swift; sourceTree = "<group>"; };
 		3CB4ADEC84B3DF7F3C27E9F0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CB4AE4D8EFB2E01E7820279 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				3CB4AC2C104632B97DBAB181 /* Views */,
 				3CB4A8DF0BE51999C0B54F57 /* Info.plist */,
 				3CB4A12829E23C9D9B876045 /* DataFlowNotes */,
+				3CB4AD262A9269E714471675 /* ClientInfo.plist */,
 			);
 			path = AvaChallenge;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				CB60DAD81D5B74C000CF6E28 /* TranscriptHeaderView.xib in Resources */,
 				3CB4A2131438B1240A69836D /* Main.storyboard in Resources */,
 				3CB4AFEB482D11D5AD552799 /* DataFlowNotes in Resources */,
+				3CB4A6DFBB930A0115443352 /* ClientInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
