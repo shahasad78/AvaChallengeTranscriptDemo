@@ -73,11 +73,13 @@ class AvaMessageCenter: NSObject {
     private override init() {
         super.init()
 
-        if let clientInfoPath = NSBundle.mainBundle().pathForResource("ClientInfo", ofType: "plist"),
-           let clientInfo = NSDictionary(contentsOfURL: NSURL(fileURLWithPath: clientInfoPath)) {
-            self.userId = clientInfo["userId"] as! UserID // TODO: Remove "stringly"-typed value
+        guard let clientInfoPath = NSBundle.mainBundle().pathForResource("ClientInfo", ofType: "plist"),
+           let clientInfo = NSDictionary(contentsOfURL: NSURL(fileURLWithPath: clientInfoPath)),
+            let userId = (clientInfo["userId"] as? UserID) else {
+            fputs("ERROR: Could not access user data", stderr)
+            return
         }
-
+        self.userId = userId
         let configuration = PNConfiguration(publishKey: "pub-c-6590f75c-b2bb-4acc-9922-d5fe5aa8dec9",
         subscribeKey: "sub-c-897a7150-da55-11e5-9ce2-0619f8945a4f")
         configuration.uuid = self.userId ?? ""
@@ -168,6 +170,30 @@ extension AvaMessageCenter:  PNObjectEventListener {
     }
 
     func client(_ client: PubNub!, didReceiveStatus status: PNStatus!) {
+
+        if status.operation == .SubscribeOperation {
+            if status.category == .PNConnectedCategory || status.category == .PNReconnectedCategory {
+                let subscribeStatus: PNSubscribeStatus =  status as! PNSubscribeStatus
+                if subscribeStatus.category == .PNConnectedCategory {
+                    // There was no error
+                } else {
+                    // The subscriber was temprorarily disconnected
+                    fputs("User was temporarily disconnected", stderr)
+                }
+            }
+            else {
+                let errorStatus: PNErrorStatus = status as! PNErrorStatus
+                if errorStatus.category == .PNAccessDeniedCategory {
+                    let message = "PubNub Access Manager cannot grant access to the client: \(self.userId)"
+                    fputs(message.cStringUsingEncoding(NSUTF8StringEncoding)!, stderr)
+                }
+                else if errorStatus.category == .PNUnexpectedDisconnectCategory {
+                    fputs("There was an unexpected error with your internet connection", stderr)
+                }
+
+            }
+
+        }
         // Select last object from list of channels and send message to it.
         if let targetChannel = self.userId {
             client.publish("Hello from the AvaChallenge Test Device", toChannel: targetChannel,
