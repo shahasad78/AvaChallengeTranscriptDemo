@@ -275,7 +275,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		82EEE08947A6F682D02C86C2 /* [CP] Embed Pods Frameworks */ = {
@@ -290,7 +290,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AvaChallenge/Pods-AvaChallenge-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/../../../../../Desktop/AvaChallengeTranscriptDemo-master/Pods/Target Support Files/Pods-AvaChallenge/Pods-AvaChallenge-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D363810386DD143D0408930D /* [CP] Copy Pods Resources */ = {
@@ -305,7 +305,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AvaChallenge/Pods-AvaChallenge-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/../../../../../Desktop/AvaChallengeTranscriptDemo-master/Pods/Target Support Files/Pods-AvaChallenge/Pods-AvaChallenge-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

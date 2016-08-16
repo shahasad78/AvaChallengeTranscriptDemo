@@ -85,6 +85,10 @@ extension TranscriptionPageViewController: UITableViewDataSource {
         return messageCenter.messageClusters[section].messageCount
     }
 
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return messageCenter.messageClusters[section].user.userName
+    }
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String(TranscriptCell), forIndexPath: indexPath) as! TranscriptCell
         // If the user is different than the user from the previous post, Display the user name.
@@ -118,15 +122,20 @@ extension  TranscriptionPageViewController: UITableViewDelegate {
         heightAtIndexPath[indexPath] = height
     }
 
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        // FIXME:  This cell is nil
-        let cell = tableView.dequeueReusableHeaderFooterViewWithIdentifier(String(TranscriptHeaderView))
-        if let header = cell as? TranscriptHeaderView {
-            header.userNameLabel.text = messageCenter.titleForSection(section)
-            return header
-        }
-        return cell
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 22.0
     }
+
+
+//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        // FIXME:  This cell is nil
+//        let cell = tableView.dequeueReusableHeaderFooterViewWithIdentifier(String(TranscriptHeaderView))
+//        if let header = cell as? TranscriptHeaderView {
+//            header.userNameLabel.text = messageCenter.titleForSection(section)
+//            return header
+//        }
+//        return cell
+//    }
 
 
 }
